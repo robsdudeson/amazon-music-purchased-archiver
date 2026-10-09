@@ -14,7 +14,7 @@ It is intentionally supervised:
 From PowerShell or Windows Terminal:
 
 ```powershell
-cd C:\Users\rd\code\amazon-music-purchased-archiver
+cd "$env:USERPROFILE\code\amazon-music-purchased-archiver"
 npm install
 npx playwright install chromium
 npm run build
@@ -50,7 +50,7 @@ If Amazon shows MFA, captcha, device authorization, or an unexpected prompt, han
 If you download files manually, place them in:
 
 ```text
-C:\Users\rd\Downloads\AmazonMusicStaging
+%USERPROFILE%\Downloads\AmazonMusicStaging
 ```
 
 Then run:
@@ -64,14 +64,14 @@ npm run dev -- organize
 Default folders:
 
 ```text
-C:\Users\rd\AmazonMusicPurchasedArchiver\manifest.csv
-C:\Users\rd\AmazonMusicPurchasedArchiver\staging
-C:\Users\rd\AmazonMusicPurchasedArchiver\browser-profile
-C:\Users\rd\Downloads\AmazonMusicStaging
-C:\Users\rd\Music\Amazon Purchased\Unsorted
+%USERPROFILE%\AmazonMusicPurchasedArchiver\manifest.csv
+%USERPROFILE%\AmazonMusicPurchasedArchiver\staging
+%USERPROFILE%\AmazonMusicPurchasedArchiver\browser-profile
+%USERPROFILE%\Downloads\AmazonMusicStaging
+%USERPROFILE%\Music\Amazon Purchased\Unsorted
 ```
 
-The manifest records source path, local path, SHA-256 hash, status, and errors. Duplicate audio files are detected by hash.
+The manifest records source path, local path, SHA256 hash, status, and errors. Duplicate audio files are detected by hash.
 
 ## Practical run strategy
 
