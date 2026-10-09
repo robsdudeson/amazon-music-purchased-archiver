@@ -1,0 +1,27 @@
+{
+  "name": "amazon-music-purchased-archiver",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Supervised Playwright automation and organizer for Amazon Music purchased downloads.",
+  "bin": {
+    "amz-music-archive": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx src/cli.ts",
+    "test": "tsx --test tests/*.test.ts",
+    "inspect-live": "tsx src/inspect-live.ts",
+    "check": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.16",
+    "playwright": "^1.48.2"
+  },
+  "devDependencies": {
+    "@types/adm-zip": "^0.5.7",
+    "@types/node": "^22.9.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
+}
