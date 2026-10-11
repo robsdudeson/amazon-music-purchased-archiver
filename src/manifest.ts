@@ -35,11 +35,8 @@ export class Manifest {
   }
 
   knownHashes(): Set<string> {
-    const content = readFileSync(this.path, 'utf8');
-    const lines = content.split(/\r?\n/).filter(Boolean).slice(1);
     const hashes = new Set<string>();
-    for (const line of lines) {
-      const cols = parseCsvLine(line);
+    for (const cols of this.rows()) {
       const status = cols[4];
       const localPath = cols[6];
       const sha = cols[7];
@@ -50,6 +47,29 @@ export class Manifest {
     }
     return hashes;
   }
+
+  knownTrackKeys(): Set<string> {
+    const keys = new Set<string>();
+    for (const cols of this.rows()) {
+      const status = cols[4];
+      if (status !== 'verified' && status !== 'duplicate') continue;
+
+      const key = trackKey(cols[1], cols[2], cols[3]);
+      if (key) keys.add(key);
+    }
+    return keys;
+  }
+
+  private rows(): string[][] {
+    const content = readFileSync(this.path, 'utf8');
+    return content.split(/\r?\n/).filter(Boolean).slice(1).map(parseCsvLine);
+  }
+}
+
+export function trackKey(title?: string, artist?: string, album?: string): string | undefined {
+  const parts = [title, artist, album].map((part) => part?.trim().toLowerCase() ?? '');
+  if (parts.some((part) => !part)) return undefined;
+  return parts.join('\u001f');
 }
 
 function parseCsvLine(line: string): string[] {
